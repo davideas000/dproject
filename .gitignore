@@ -1,0 +1,5 @@
+*.[oa]
+.tup/
+.dproject/
+src/dproject
+tests/tests

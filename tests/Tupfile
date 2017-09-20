@@ -1,0 +1,8 @@
+include_rules
+
+CFLAGS += -Wno-padded
+
+#: test_0.cpp |> gcc $(INCLUDE_DIRS) -o %o %f |> %B
+: foreach *.cpp |> !cc |>
+#: *.o $(LOCAL_LIBS) |> !ld |> test_0
+: *.o | $(LOCAL_LIBS) |> !ld |> %B

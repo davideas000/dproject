@@ -1,0 +1,42 @@
+PROJECT = dproject
+
+CC = clang++-3.9
+
+CFLAGS = -std=c++14 
+#CFLAGS += -Wall
+CFLAGS += -Weverything
+CFLAGS += -fcolor-diagnostics
+CFLAGS += -Wno-c++98-compat
+CFLAGS += -Wno-shorten-64-to-32
+CFLAGS += -Wno-undefined-func-template
+CFLAGS += -Wno-exit-time-destructors
+CFLAGS += -Wno-global-constructors
+
+#CFLAGS += -fno-diagnostics-fixit-info
+#CFLAGS += -fdiagnostics-show-category=none/id/name
+#CFLAGS += -fdiagnostics-show-category=yes
+#CFLAGS += -fno-diagnostics-show-option
+#CFLAGS += -Wshadow
+#LFLAGS = -static -std=c++11
+LDFLAGS = -static
+
+
+INCLUDE_DIRS += -I$(TUP_CWD)/src 
+INCLUDE_DIRS += -I$(TUP_CWD)/src/leveldb/include 
+INCLUDE_DIRS += -I/media/windows/Users/HP/Desktop/programming/cpp/git/Catch/include
+
+LOCAL_LIBS = $(TUP_CWD)/src/dp_project/libdp_project.a
+LOCAL_LIBS += $(TUP_CWD)/src/db_manager/libdb_manager.a
+LOCAL_LIBS += $(TUP_CWD)/src/leveldb/out-static/libleveldb.a
+
+LIBS += -lboost_program_options 
+LIBS += -lboost_filesystem 
+LIBS += -lboost_system 
+LIBS += -lvsqlitepp
+LIBS += -lsqlite3
+LIBS += -lpthread
+LIBS += -ldl
+
+!cc = |> ^ CC %f ^ $(CC) -c $(CFLAGS) $(INCLUDE_DIRS) %f -o %o |> %B.o
+    !ar = |> ^ AR %o ^ ar crc %o %f |> lib%d.a
+!ld = |> ^ LINK %o ^ $(CC) $(LDFLAGS) $(LIBS_DIRS) -o %o %f $(LIBS) |> $(PROJECT)
