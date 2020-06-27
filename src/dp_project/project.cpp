@@ -144,7 +144,7 @@ void dproject::Project::add(const std::vector<std::string> &args){
             boost::filesystem::copy_file(path, args[1] + "/" + build_file);
         }
         else {
-            std::cerr << "error: build file not found!" << std::endl;
+            std::cerr << "error: " << path << " not found!" << std::endl;
             exit(EXIT_FAILURE);
         }
 

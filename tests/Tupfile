@@ -1,6 +1,7 @@
 include_rules
 
-CFLAGS += -Wno-padded
+#CFLAGS += -Wno-padded
+CFLAGS += -Wno-missing-prototypes
 
 #: test_0.cpp |> gcc $(INCLUDE_DIRS) -o %o %f |> %B
 : foreach *.cpp |> !cc |>
